@@ -1,0 +1,96 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Калькулятор
+{% endblock %}
+
+
+{% block content %}
+    <h2 style="text-align: center">Расчет размера позиции</h2>
+    <form>
+        <div style="display: flex; flex-wrap: wrap; margin-left: 25%">
+            <div class="alert alert-success mt-2" style="margin: 10px; width: 30%">
+                <p>Общий баланс счета:</p>
+                <input id="balance" type="text" placeholder="9999999999" class="form-row"/> $
+            </div>
+
+            <div class="alert alert-success mt-2" style="margin: 10px; width: 30%">
+                <div>Моя позиция:</div>
+                <input name="ls" type="radio" id="long" value="long"> Лонг <br>
+                <input name="ls" type="radio" id="short" value="short"> Шорт <br>
+            </div>
+        </div>
+
+        <div class="alert alert-success mt-2" style="width: 30%; margin-left: 35%">
+            <div>Точка входа:</div>
+            <input id="entry-price" type="text" placeholder="15000" class="form-row"/>
+            <p></p>
+            <div>Цена стоп-лосса:</div>
+            <input id="stop-loss" type="text" placeholder="15000" class="form-row"/>
+        </div>
+
+
+        <div class="alert alert-success mt-2" style="width: 30%; margin-left: 35%">
+            <div>Готов потерять % баланса:</div>
+            <input id="my-loss" type="text" maxlength="3" placeholder="10" class="form-row"/>%
+            <p></p>
+            <div>Кредитное плечо:</div>
+            <input id="leverage" type="text" placeholder="75" class="form-row"/>X
+        </div>
+
+
+        <div style="margin-left: 40%">
+            <input class="btn btn-success" type="button" value="Посчитать" onclick="calculate();" />
+            <input class="btn btn-danger" value="Очистить" onclick="clearH1()" type="reset"/>
+
+            <h1 id="position-size">0 $</h1>
+        </div>
+    </form>
+    <script>
+        function calculate(){
+            var long_or_short = document.getElementsByName("ls");
+
+            var balance = parseFloat(document.getElementById("balance").value);
+            var entry = parseFloat(document.getElementById("entry-price").value);
+            var stop = parseFloat(document.getElementById("stop-loss").value);
+            var loss = parseFloat(document.getElementById("my-loss").value);
+            var leverage = parseFloat(document.getElementById("leverage").value);
+
+
+            if (long_or_short[0].checked){
+                if (entry<stop){
+                    alert("Цена стоп-лосса не может быть выше при лонге")
+                }
+                else {
+                    var risk = (1 - stop/entry)*100;
+                    var potential_loss = balance/100*loss;
+                    var itog = (potential_loss*100)/(risk*leverage);
+                    var itogo = parseFloat(itog).toFixed(3)
+                    document.getElementById("position-size").innerHTML = itogo + ' $';
+                }
+            }
+            else{
+                if (entry>stop){
+                    alert("Цена стоп-лосса не может быть ниже при шорте")
+                }
+                else {
+                    var risk = (1 - entry/stop)*100;
+                    var potential_loss = balance/100*loss;
+                    var itog = (potential_loss*100)/(risk*leverage)
+                    var itogo = parseFloat(itog).toFixed(3)
+                    document.getElementById("position-size").innerHTML = itogo + ' $';
+                }
+            }
+
+
+            if (isNaN(balance) == true || isNaN(entry) == true) alert("Заполните все поля")
+            if (isNaN(balance) == true) balance = 0
+            if (isNaN(entry) == true) entry = 0
+
+        }
+        function clearH1(){
+            document.getElementById("position-size").innerHTML = "0" + ' $';
+        }
+    </script>
+{% endblock %}
+

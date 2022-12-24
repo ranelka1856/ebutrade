@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Личный кабинет
+{% endblock %}
+
+
+{% block content %}
+    <h2 style="text-align: center">Личный кабинет:</h2>
+
+    <form method="post">
+        <input type="text" placeholder="Введите api" class="form-control">
+        <input type="text" placeholder="Введите api" class="form-control">
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+
+
+    {% for el in keys %}
+        <div class="alert alert_success">
+            <h3>API-key: {{el.my_api_key}}</h3>
+            <h3>API-secret: {{el.my_api_secret}}</h3>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Аналитика
+{% endblock %}
+
+{% block content %}
+<!--    <p><b>Выберите биржу:</b></p>-->
+<!--    <input type="radio" name="exchange" value="binance"> Binance <br>-->
+<!--    <input type="radio" name="exchange" value="okex"> Okex <br>-->
+<!--    <input type="radio" name="exchange" value="coinbase"> Coinbase <br>-->
+<!--    <input type="radio" name="exchange" value="kraken"> Kraken <br>-->
+<!--    <input type="radio" name="exchange" value="bitget"> Bitget <br>-->
+<!--    <input type="radio" name="exchange" value="huobi"> Huobi <br> <br>-->
+
+<!--    <p><b>Ваш API ключ:</b></p>-->
+<!--    <input type="text" size="80">-->
+<!--    <button type="submit">Сохранить</button>-->
+<!--    <p></p>-->
+
+    <h2 style="text-align: center">Данные с биржи:</h2>
+
+
+    <div style="display: flex; flex-wrap: wrap">
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h5>BTC</h5>
+            {% for val in btc %}
+                <div>{{val}}</div>
+            {% endfor %}
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h5>ETH</h5>
+            {% for val in eth %}
+                <div>{{val}}</div>
+            {% endfor %}
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h5>BNB</h5>
+            {% for val in bnb %}
+                <div>{{val}}</div>
+            {% endfor %}
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h5>SOL</h5>
+            {% for val in sol %}
+                <div>{{val}}</div>
+            {% endfor %}
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h5>XRP</h5>
+            {% for val in xrp %}
+                <div>{{val}}</div>
+            {% endfor %}
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h5>LTC</h5>
+            {% for val in ltc %}
+                <div>{{val}}</div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

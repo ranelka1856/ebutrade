@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Сратегия
+{% endblock %}
+
+{% block content %}
+    <h2 style="text-align: center">Моя стратегия</h2>
+    <div style="display: flex; flex-wrap: wrap">
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h6>Шортить опасно?</h6>
+            <input name="q1" type="radio" id="a1" value="yes"> Да <br>
+            <input name="q1" type="radio" id="a2" value="no"> Нет <br>
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h6>Можно ли заходить в позу на всю котлету?</h6>
+            <input name="q2" type="radio" id="b1" value="yes"> Да <br>
+            <input name="q2" type="radio" id="b2" value="no"> Нет <br>
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h6>Стоит ли слушать Ранеля?</h6>
+            <input name="q3" type="radio" id="c1" value="yes"> Да <br>
+            <input name="q3" type="radio" id="c2" value="no"> Нет <br>
+        </div>
+
+        <div class="alert alert-success mt-2" style="margin: 10px; width: 31%">
+            <h6>Больший риск - больший PNL?</h6>
+            <input name="q4" type="radio" id="d1" value="yes"> Да <br>
+            <input name="q4" type="radio" id="d2" value="no"> Нет <br>
+        </div>
+    </div>
+    <a class="btn btn-outline-success" onclick="rate()">Записать ответы</a>
+    <p></p>
+    <h5>Рейтинг: </h5>
+    <h5 id="rating">0</h5>
+    <a class="btn btn-outline-success" href="https://ru.tradingview.com/u/RANELKA/" target="_blank">Поумнеть</a>
+
+    <script>
+        function rate(){
+            document.getElementById("rating").innerHTML = "2/10";
+        }
+    </script>
+{% endblock %}
